@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusAI - Smart Education Platform</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="shivam.css">
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <i class="fa-solid fa-graduation-cap"></i>
+      <span>CampusAI</span>
+    </div>
+
+    <div class="sidebar-menu">
+      <div class="menu-item active" onclick="showSection('dashboard')">
+        <i class="fa-solid fa-chart-line"></i> Dashboard
+      </div>
+      <div class="menu-item" onclick="showSection('learning')">
+        <i class="fa-solid fa-brain"></i> AI Learning Assistant
+      </div>
+      <div class="menu-item" onclick="showSection('attendance')">
+        <i class="fa-solid fa-user-check"></i> Smart Attendance
+      </div>
+      <div class="menu-item" onclick="showSection('lostfound')">
+        <i class="fa-solid fa-box-open"></i> Lost & Found
+      </div>
+      <div class="menu-item" onclick="showSection('doubt')">
+        <i class="fa-solid fa-comments"></i> AI Doubt Solver
+      </div>
+      <div class="menu-item" onclick="showSection('skills')">
+        <i class="fa-solid fa-certificate"></i> Skill Tracker
+      </div>
+      <div class="menu-item" onclick="showSection('timetable')">
+        <i class="fa-solid fa-calendar-days"></i> Smart Timetable
+      </div>
+      <div class="menu-item" onclick="showSection('accessibility')">
+        <i class="fa-solid fa-universal-access"></i> Accessibility
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <h2 id="pageTitle">Dashboard</h2>
+      <div class="user-info">
+        <span>Rahul Sharma</span>
+        <div class="avatar">R</div>
+      </div>
+    </div>
+
+    <!-- ================= DASHBOARD ================= -->
+    <div id="dashboard" class="section active">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <i class="fa-solid fa-brain"></i>
+          <h3>4</h3>
+          <p>Weak Topics</p>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-user-check"></i>
+          <h3>92%</h3>
+          <p>Attendance</p>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-certificate"></i>
+          <h3>7</h3>
+          <p>Certificates</p>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-comments"></i>
+          <h3>12</h3>
+          <p>Doubts Solved</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Quick Actions</h3>
+        <div class="quick-actions">
+          <button onclick="showSection('learning')">Start Learning Quiz</button>
+          <button onclick="showSection('doubt')">Ask a Doubt</button>
+          <button onclick="showSection('lostfound')">Report Lost Item</button>
+          <button onclick="showSection('timetable')">View Timetable</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 1. AI LEARNING ASSISTANT ================= -->
+    <div id="learning" class="section">
+      <div class="card">
+        <h3>AI Personalized Learning Assistant</h3>
+        <p style="color:#9ca3af; margin-bottom:20px;">Take a diagnostic quiz to find your weak topics</p>
+        <button class="btn-primary" onclick="startLearningQuiz()">Start Diagnostic Quiz</button>
+      </div>
+
+      <div id="learningResult" style="display:none; margin-top:20px;"></div>
+    </div>
+
+    <!-- ================= 2. SMART ATTENDANCE ================= -->
+    <div id="attendance" class="section">
+      <div class="card">
+        <h3>Smart Attendance System</h3>
+        <p style="color:#9ca3af; margin-bottom:20px;">Mark attendance using Face / QR</p>
+        
+        <div class="attendance-box">
+          <button class="btn-primary" onclick="markAttendance()">Mark Attendance (Demo)</button>
+          <p id="attendanceMsg" style="margin-top:15px; color:#4ade80;"></p>
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Subject</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>25 Aug 2026</td><td>Data Structures</td><td class="present">Present</td></tr>
+            <tr><td>24 Aug 2026</td><td>DBMS</td><td class="present">Present</td></tr>
+            <tr><td>23 Aug 2026</td><td>Operating System</td><td class="absent">Absent</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= 3. LOST & FOUND ================= -->
+    <div id="lostfound" class="section">
+      <div class="card">
+        <h3>Campus Lost & Found</h3>
+        
+        <div class="form-group">
+          <input type="text" id="itemName" placeholder="Item Name (e.g. Black Wallet)">
+          <select id="itemType">
+            <option>Lost</option>
+            <option>Found</option>
+          </select>
+          <button class="btn-primary" onclick="addLostFound()">Submit</button>
+        </div>
+
+        <div id="lostFoundList" class="list-box">
+          <div class="list-item">
+            <strong>Black Water Bottle</strong> - Found near Library
+            <span class="badge found">Found</span>
+          </div>
+          <div class="list-item">
+            <strong>ID Card</strong> - Lost in Canteen
+            <span class="badge lost">Lost</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 4. AI DOUBT SOLVER ================= -->
+    <div id="doubt" class="section">
+      <div class="card">
+        <h3>AI Doubt Solving Platform</h3>
+        <div class="chat-box">
+          <div id="chatMessages" class="chat-messages">
+            <div class="bot-msg">Hello! Ask me any academic doubt.</div>
+          </div>
+          <div class="chat-input">
+            <input type="text" id="doubtInput" placeholder="Type your doubt here...">
+            <button onclick="askDoubt()">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= 5. SKILL TRACKER ================= -->
+    <div id="skills" class="section">
+      <div class="card">
+        <h3>Digital Skill & Certificate Tracker</h3>
+        
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h4>React.js</h4>
+            <div class="progress-bg"><div class="progress-fill" style="width:80%"></div></div>
+            <span>80%</span>
+          </div>
+          <div class="skill-card">
+            <h4>Python</h4>
+            <div class="progress-bg"><div class="progress-fill" style="width:65%"></div></div>
+            <span>65%</span>
+          </div>
+          <div class="skill-card">
+            <h4>DSA</h4>
+            <div class="progress-bg"><div class="progress-fill" style="width:45%"></div></div>
+            <span>45%</span>
+          </div>
+        </div>
+
+        <h4 style="margin-top:30px;">Certificates</h4>
+        <ul class="cert-list">
+          <li><i class="fa-solid fa-certificate"></i> Google Cloud Fundamentals</li>
+          <li><i class="fa-solid fa-certificate"></i> Meta Front-End Developer</li>
+          <li><i class="fa-solid fa-certificate"></i> NPTEL DBMS</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ================= 6. SMART TIMETABLE ================= -->
+    <div id="timetable" class="section">
+      <div class="card">
+        <h3>Smart Timetable Generator</h3>
+        <button class="btn-primary" onclick="generateTimetable()">Generate Clash-Free Timetable</button>
+        
+        <table class="table" id="timetableTable" style="margin-top:25px; display:none;">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>9:00 - 10:00</td>
+              <td>DSA</td>
+              <td>DBMS</td>
+              <td>OS</td>
+            </tr>
+            <tr>
+              <td>10:00 - 11:00</td>
+              <td>CN</td>
+              <td>DSA</td>
+              <td>DBMS</td>
+            </tr>
+            <tr>
+              <td>11:00 - 12:00</td>
+              <td>OS</td>
+              <td>CN</td>
+              <td>DSA</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ================= 7. ACCESSIBILITY ================= -->
+    <div id="accessibility" class="section">
+      <div class="card">
+        <h3>Accessibility Platform for Students</h3>
+        <p style="color:#9ca3af; margin-bottom:20px;">Special features for differently-abled students</p>
+
+        <div class="access-options">
+          <button onclick="toggleContrast()">High Contrast Mode</button>
+          <button onclick="increaseFont()">Increase Font Size</button>
+          <button onclick="readAloud()">Text to Speech (Demo)</button>
+          <button onclick="alert('Screen Reader mode activated (Demo)')">Screen Reader Support</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="shivam.js"></script>
+</body>
+</html>
